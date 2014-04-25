@@ -98,6 +98,8 @@ library. This is currently the only way to pass `User-Agent`.
 `extra_info` should be an instance of `SystemInfo`. Currently only language
 reporting is supported:
 
+`ga_extra` should be a dictionary of GA supported parameters. See https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
+
 ```python
 SystemInfo([language=None])
 ```
@@ -109,5 +111,8 @@ from google_measurement_protocol import PageView, report, SystemInfo
 view = PageView(path='/my-page/', title='My Page', referrer='http://example.com/')
 headers = {'user-agent': 'my-user-agent 1.0'}
 info = SystemInfo(language='en-us')
-report('UA-123456-1', client_id, view, extra_info=info, extra_header=headers)
+extra = { 'uid': 12345678,
+          'uip': '123.34.45.678,
+         }
+report('UA-123456-1', client_id, view, extra_info=info, extra_header=headers, ga_extra=extra)
 ```

@@ -10,15 +10,15 @@ def _request(data, extra_headers):
 
 
 def report(tracking_id, client_id, requestable, extra_info=None,
-           extra_headers=None):
+           extra_headers=None, ga_extra=None):
     """Actually report measurements to Google Analytics."""
     return [_request(data, extra_headers)
             for data, extra_headers in payloads(
-            tracking_id, client_id, requestable, extra_info, extra_headers)]
+            tracking_id, client_id, requestable, extra_info, extra_headers, ga_extra)]
 
 
 def payloads(tracking_id, client_id, requestable, extra_info=None,
-             extra_headers=None):
+             extra_headers=None, ga_extra=None):
     """Get data and headers of API requests for Google Analytics.
 
     Generates a sequence of (data, headers) pairs. Both `data` and `headers`
@@ -32,6 +32,9 @@ def payloads(tracking_id, client_id, requestable, extra_info=None,
     if extra_info:
         for payload in extra_info:
             extra_payload.update(payload)
+    
+    if ga_extra:
+        extra_payload.update(ga_extra)
 
     for request_payload in requestable:
         final_payload = dict(request_payload)

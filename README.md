@@ -112,7 +112,7 @@ view = PageView(path='/my-page/', title='My Page', referrer='http://example.com/
 headers = {'user-agent': 'my-user-agent 1.0'}
 info = SystemInfo(language='en-us')
 extra = { 'uid': 12345678,
-          'uip': '123.34.45.678,
+          'uip': '123.34.45.678',
          }
 report('UA-123456-1', client_id, view, extra_info=info, extra_header=headers, ga_extra=extra)
 ```
